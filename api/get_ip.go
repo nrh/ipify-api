@@ -8,11 +8,13 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/julienschmidt/httprouter"
-	"github.com/rdegges/ipify-api/models"
 	"net"
 	"net/http"
 	"strings"
+
+	"gopkg.in/julienschmidt/httprouter.v1"
+
+	"github.com/nrh/ipify-appengine/models"
 )
 
 // GetIP returns a user's public facing IP address (IPv4 OR IPv6).

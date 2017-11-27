@@ -5,20 +5,17 @@
 // ipify is a simple API service which returns a user's public IP address (it
 // supports handling both IPv4 and IPv6 addresses).
 
-package main
+package ipify
 
 import (
-	"github.com/julienschmidt/httprouter"
-	"github.com/rdegges/ipify-api/api"
-	"github.com/rs/cors"
-	"log"
+	"gopkg.in/julienschmidt/httprouter.v1"
+	"gopkg.in/rs/cors.v1"
 	"net/http"
-	"os"
+
+	"github.com/nrh/ipify-appengine/api"
 )
 
-// main launches our web server which runs indefinitely.
-func main() {
-
+func roothandler(w http.ResponseWriter, r *http.Request) {
 	// Setup all routes.  We only service API requests, so this is basic.
 	router := httprouter.New()
 	router.GET("/", api.GetIP)
@@ -31,13 +28,14 @@ func main() {
 	//	- Support for CORS to make JSONP work.
 	handler := cors.Default().Handler(router)
 
-	// Start the server.
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "3000"
+	// on appengine, there's no X-Forwarded-For, so we'll fake it
+	if r.Header.Get("X-Forwarded-For") == "" && r.RemoteAddr != "" {
+		r.Header.Set("X-Forwarded-For", r.RemoteAddr)
 	}
+	handler.ServeHTTP(w, r)
+}
 
-	log.Println("Starting HTTP server on port:", port)
-	log.Fatal(http.ListenAndServe(":"+port, handler))
-
+// appengine entrypoint
+func init() {
+	http.HandleFunc("/", roothandler)
 }

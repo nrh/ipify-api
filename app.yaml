@@ -1,0 +1,23 @@
+runtime: go
+api_version: go1.8
+handlers:
+  - url: /.*
+    script: _go_app
+
+skip_files:
+  - ^(.*/)?app\.yaml
+  - ^(.*/)?app\.yml
+  - ^(.*/)?#.*#
+  - ^(.*/)?.*~
+  - ^(.*/)?.*\.py[co]
+  - ^(.*/)?.*/RCS/.*
+  - ^(.*/)?\..*
+  - ^(.*/)?tests$
+  - ^(.*/)?test$
+  - ^test/(.*/)?
+  - ^COPYING.LESSER
+  - ^README\..*
+  - \.gitignore
+  - ^\.git/.*
+  - \.*\.lint$
+
