@@ -6,7 +6,7 @@ Accessible via `http://api.ipify.io` and `https://api.ipify.io`
 
 Feel free to use and abuse.
 
-```bash
+```console
 $ curl 'http://api.ipify.io'
 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 $ curl 'https://api.ipify.io'
