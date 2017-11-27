@@ -1,4 +1,4 @@
-A fork of [@rdegges'](https://twitter.com/rdegges) [ipify](www.ipify.org) [(github)](https://github.com/rdegges/ipify-api)  with IPv6 support, hosted
+A fork of [@rdegges'](https://twitter.com/rdegges) [ipify](https://www.ipify.org/) with IPv6 support, hosted
 on [Google App Engine](https://cloud.google.com/appengine)
 
 Accessible via `http://api.ipify.io` and `https://api.ipify.io`
