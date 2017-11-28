@@ -1,7 +1,15 @@
 sudo: false
 language: go
 go:
-  - 1.8
+- 1.8
 before_script: go get github.com/mitchellh/gox
 script: go build
 after_success: gox -osarch="linux/amd64" && echo $TRAVIS_TEST_RESULT
+deploy:
+  provider: gae
+  project: hep-ipify
+  keyfile: travis_secret.json
+  on: production
+before_install:
+- openssl aes-256-cbc -K $encrypted_f8e2d005bf63_key -iv $encrypted_f8e2d005bf63_iv
+  -in travis_secret.json.enc -out travis_secret.json -d
