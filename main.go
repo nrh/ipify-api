@@ -28,10 +28,6 @@ func roothandler(w http.ResponseWriter, r *http.Request) {
 	//	- Support for CORS to make JSONP work.
 	handler := cors.Default().Handler(router)
 
-	// on appengine, there's no X-Forwarded-For, so we'll fake it
-	if r.Header.Get("X-Forwarded-For") == "" && r.RemoteAddr != "" {
-		r.Header.Set("X-Forwarded-For", r.RemoteAddr)
-	}
 	handler.ServeHTTP(w, r)
 }
 
